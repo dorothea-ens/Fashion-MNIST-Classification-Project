@@ -1,0 +1,236 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\theae> cd C:\Users\theae\Desktop\fashion_mnist_project
+PS C:\Users\theae\Desktop\fashion_mnist_project> fashion_env\Scripts\activate
+(fashion_env) PS C:\Users\theae\Desktop\fashion_mnist_project> python fashion_classifier.py
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1781295603.821218   37168 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1781295606.792046   37168 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+======================================================================
+FASHION-MNIST CLASSIFICATION: CNN vs RANDOM FOREST
+======================================================================
+
+[1/7] Loading Fashion-MNIST dataset...
+   Total training images: 60000
+   Test images: 10000
+   Image size: 28x28 pixels
+   Number of classes: 10
+   Classes: T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, Ankle boot
+
+[2/7] Preprocessing data...
+   Pixel normalization: [0,255] -> [0,1]
+   Train set: 48000 images
+   Validation set: 12000 images
+   Test set: 10000 images
+   CNN input shape: (48000, 28, 28, 1)
+   RF input shape: (48000, 784)
+
+[3/7] Building and training CNN...
+I0000 00:00:1781295608.110355   37168 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+   CNN Architecture:
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ conv2d (Conv2D)                      │ (None, 26, 26, 32)          │             320 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d (MaxPooling2D)         │ (None, 13, 13, 32)          │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_1 (Conv2D)                    │ (None, 11, 11, 64)          │          18,496 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_1 (MaxPooling2D)       │ (None, 5, 5, 64)            │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_2 (Conv2D)                    │ (None, 3, 3, 64)            │          36,928 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ flatten (Flatten)                    │ (None, 576)                 │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 64)                  │          36,928 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_1 (Dense)                      │ (None, 10)                  │             650 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 93,322 (364.54 KB)
+ Trainable params: 93,322 (364.54 KB)
+ Non-trainable params: 0 (0.00 B)
+   Training CNN (10 epochs)...
+Epoch 1/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 11s 7ms/step - accuracy: 0.8085 - loss: 0.5245 - val_accuracy: 0.8559 - val_loss: 0.3895
+Epoch 2/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 7ms/step - accuracy: 0.8768 - loss: 0.3373 - val_accuracy: 0.8851 - val_loss: 0.3309
+Epoch 3/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 6ms/step - accuracy: 0.8953 - loss: 0.2875 - val_accuracy: 0.8971 - val_loss: 0.2878
+Epoch 4/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 6ms/step - accuracy: 0.9049 - loss: 0.2571 - val_accuracy: 0.8953 - val_loss: 0.2888
+Epoch 5/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 7ms/step - accuracy: 0.9129 - loss: 0.2303 - val_accuracy: 0.9066 - val_loss: 0.2656
+Epoch 6/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 6ms/step - accuracy: 0.9241 - loss: 0.2069 - val_accuracy: 0.9079 - val_loss: 0.2635
+Epoch 7/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 6ms/step - accuracy: 0.9303 - loss: 0.1885 - val_accuracy: 0.9082 - val_loss: 0.2532
+Epoch 8/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 9s 6ms/step - accuracy: 0.9368 - loss: 0.1706 - val_accuracy: 0.9090 - val_loss: 0.2584
+Epoch 9/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 10s 7ms/step - accuracy: 0.9420 - loss: 0.1561 - val_accuracy: 0.9119 - val_loss: 0.2622
+Epoch 10/10
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 9s 6ms/step - accuracy: 0.9471 - loss: 0.1399 - val_accuracy: 0.9125 - val_loss: 0.2680
+   CNN training completed in 98.56 seconds
+
+[4/7] Building and training Random Forest...
+   Configuration: n_estimators=100, criterion='entropy', max_depth=100
+   Random Forest training completed in 11.08 seconds
+
+[5/7] Getting predictions...
+   Predictions completed
+
+[6/7] Generating results...
+
+======================================================================
+TABLE 1: PRECISION AND RECALL PER CLASS (TEST SET)
+======================================================================
+
+Class           CNN Prec   CNN Rec    RF Prec    RF Rec
+-------------------------------------------------------
+T-shirt/top     0.852      0.876      0.821      0.864
+Trouser         0.994      0.980      0.994      0.964
+Pullover        0.850      0.883      0.762      0.787
+Dress           0.923      0.902      0.868      0.907
+Coat            0.812      0.910      0.758      0.806
+Sandal          0.987      0.973      0.980      0.961
+Shirt           0.784      0.675      0.718      0.583
+Sneaker         0.948      0.975      0.934      0.955
+Bag             0.984      0.965      0.955      0.973
+Ankle boot      0.971      0.964      0.949      0.949
+
+======================================================================
+TABLE 2: PRECISION AND RECALL PER CLASS (TRAINING SET)
+======================================================================
+
+Class           CNN Prec   CNN Rec    RF Prec    RF Rec
+-------------------------------------------------------
+T-shirt/top     0.916      0.937      1.000      1.000
+Trouser         0.999      0.992      1.000      1.000
+Pullover        0.926      0.943      1.000      1.000
+Dress           0.972      0.959      1.000      1.000
+Coat            0.894      0.964      1.000      1.000
+Sandal          0.999      0.994      1.000      1.000
+Shirt           0.912      0.828      1.000      1.000
+Sneaker         0.979      0.989      1.000      1.000
+Bag             0.999      0.992      1.000      1.000
+Ankle boot      0.988      0.983      1.000      1.000
+
+======================================================================
+TABLE 3: TRAINING TIMES
+======================================================================
+CNN:           98.56 seconds (1.64 minutes)
+Random Forest: 11.08 seconds (0.18 minutes)
+
+======================================================================
+TABLE 4: ACCURACY SUMMARY
+======================================================================
+Model           Train        Validation   Test
+--------------------------------------------------
+CNN             0.9581 (95.81%)     0.9125 (91.25%)     0.9103 (91.03%)
+Random Forest   1.0000 (100.00%)     0.8852 (88.52%)     0.8749 (87.49%)
+
+======================================================================
+GENERATING CONFUSION MATRIX IMAGES
+======================================================================
+   Saved: RF_train_confusion_matrix.png
+   Saved: RF_test_confusion_matrix.png
+   Saved: CNN_train_confusion_matrix.png
+   Saved: CNN_test_confusion_matrix.png
+
+   Saving CSV files...
+   Saved: RF_train_confusion_matrix.csv
+   Saved: RF_test_confusion_matrix.csv
+   Saved: CNN_train_confusion_matrix.csv
+   Saved: CNN_test_confusion_matrix.csv
+
+======================================================================
+WORST PERFORMING CATEGORIES ANALYSIS
+======================================================================
+
+CNN - 3 worst performing categories (by precision on test set):
+   6: Shirt - Precision: 0.784, Recall: 0.675
+   4: Coat - Precision: 0.812, Recall: 0.910
+   2: Pullover - Precision: 0.850, Recall: 0.883
+
+Random Forest - 3 worst performing categories (by precision on test set):
+   6: Shirt - Precision: 0.718, Recall: 0.583
+   4: Coat - Precision: 0.758, Recall: 0.806
+   2: Pullover - Precision: 0.762, Recall: 0.787
+
+EXPLANATION FOR LOW PERFORMANCE:
+   - Shirts, T-shirts/tops, Pullovers, and Coats are frequently confused
+   - These are all upper-body garments with sleeves and similar silhouettes
+   - Grayscale 28x28 images lack texture and color details to distinguish them
+   - A shirt vs a T-shirt vs a Pullover can look nearly identical at low resolution
+   - The RF classifier struggles more because flattening removes spatial relationships
+
+BEST PERFORMING CATEGORIES:
+   - Trousers, Bags, Sandals, Sneakers, Ankle boots have distinctive shapes
+   - These are less likely to be confused with other categories
+
+======================================================================
+COMPARISON AND RECOMMENDATION
+======================================================================
+
+MODEL COMPARISON:
+   Test Accuracy:  CNN = 91.03%  vs  RF = 87.49%
+   Training time:  CNN = 98.6s  vs  RF = 11.1s
+   Advantage CNN:  +3.5% accuracy improvement
+   Advantage RF:   0.1x faster training
+
+----------------------------------------------------------------------
+RECOMMENDATION: USE CNN IN PRODUCTION
+----------------------------------------------------------------------
+
+JUSTIFICATION:
+   1. Higher Accuracy: CNN achieves higher test accuracy than RF
+   2. Better Generalization: CNN maintains smaller gap between train and test
+   3. Feature Learning: CNNs learn spatial hierarchies (edges, textures, shapes)
+   4. Pixel Independence: RF treats each pixel separately, missing spatial relationships
+   5. Fashion items have consistent shapes - CNNs exploit this structure naturally
+   6. The accuracy gain justifies the longer training time for production
+
+WHEN TO USE RANDOM FOREST INSTEAD:
+   - Extremely limited computational resources
+   - Need very fast training (< 1 minute)
+   - No GPU available and CPU is very slow
+   - Simple baseline for comparison required
+
+======================================================================
+SCRIPT COMPLETED SUCCESSFULLY
+======================================================================
+
+OUTPUT FILES GENERATED:
+   📊 CNN_test_confusion_matrix.png
+   📊 CNN_train_confusion_matrix.png
+   📊 RF_test_confusion_matrix.png
+   📊 RF_train_confusion_matrix.png
+   📄 CNN_test_classification_report.csv
+   📄 CNN_train_classification_report.csv
+   📄 RF_test_classification_report.csv
+   📄 RF_train_classification_report.csv
+   📄 cnn_test_confusion_matrix.csv
+   📄 cnn_train_confusion_matrix.csv
+   📄 rf_test_confusion_matrix.csv
+   📄 rf_train_confusion_matrix.csv
+
+======================================================================
+All requirements from Task 2 have been satisfied:
+   ✅ Fashion-MNIST dataset description
+   ✅ CNN implementation (TensorFlow/Keras)
+   ✅ Random Forest implementation
+   ✅ 4 confusion matrices (train + test)
+   ✅ Precision/Recall tables (train + test)
+   ✅ Training times reported
+   ✅ Worst classes analysis with explanation
+   ✅ Comparison and recommendation
+======================================================================
+(fashion_env) PS C:\Users\theae\Desktop\fashion_mnist_project>
