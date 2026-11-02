@@ -4,6 +4,8 @@
 
 This project compares a **Convolutional Neural Network (CNN)** against a **Random Forest (RF)** classifier on the Fashion-MNIST dataset. The CNN achieves superior accuracy (91.03%) while the RF trains 9× faster (11.1s vs 98.6s).
 
+📄 [Read the detailed project report](PROJECT_REPORT.md)
+
 ## Dataset
 
 Fashion-MNIST contains 70,000 grayscale images (28×28) across 10 clothing categories:
